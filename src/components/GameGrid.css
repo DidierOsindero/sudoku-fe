@@ -2,8 +2,8 @@
   display: grid;
   grid-template-columns: auto;
 
-  border-left: 1px solid black;
-  border-top: 1px solid black;
+  border-left: 2px solid black;
+  border-top: 2px solid black;
 }
 
 .grid-row {
@@ -12,8 +12,8 @@
   border-bottom: 1px solid gray;
 }
 
-.grid-row:nth-child(2n) {
-  border-bottom: 4px solid red;
+.grid-row:nth-child(3n) {
+  border-bottom: 2px solid black;
 }
 
 .grid-cell {
@@ -23,7 +23,8 @@
   border: 0;
   outline: none;
   padding: 0;
-  font: inherit;
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  color: blueviolet;
 
   /*
     Actual Styling
@@ -36,5 +37,9 @@
 }
 
 .grid-cell:nth-child(3n) {
-  border-right: 1px solid black;
+  border-right: 2px solid black;
+}
+
+.preset-num {
+  color: dimgrey;
 }

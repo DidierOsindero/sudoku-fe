@@ -10,18 +10,16 @@ export default function GameGrid({ gameGrid }: IGameGridProps) {
       <div className="grid-container">
         {gameGrid.map((row, idx) => {
           return (
-            <div key={idx}>
-              <div className="grid-row">
-                {row.map((cell, pos) => {
-                  return cell === "." ? (
-                    <input className="grid-cell" key={pos} maxLength={1} />
-                  ) : (
-                    <div className="grid-cell preset-num" key={pos}>
-                      {cell}
-                    </div>
-                  );
-                })}
-              </div>
+            <div key={idx} className="grid-row">
+              {row.map((cell, pos) => {
+                return cell === "." ? (
+                  <input className="grid-cell" key={pos} maxLength={1} />
+                ) : (
+                  <div className="grid-cell preset-num" key={pos}>
+                    {cell}
+                  </div>
+                );
+              })}
             </div>
           );
         })}
