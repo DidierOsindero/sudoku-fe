@@ -23,7 +23,12 @@ export default function GameGrid({ gameGrid, setGameGrid }: IGameGridProps) {
                 return cell.status === "user-defined" ? (
                   <input
                     className="grid-cell"
-                    value={gameGrid[rowIdx][columnIdx].val}
+                    value={
+                      //If the cell is "." show nothing
+                      gameGrid[rowIdx][columnIdx].val !== "."
+                        ? gameGrid[rowIdx][columnIdx].val
+                        : ""
+                    }
                     key={columnIdx}
                     maxLength={1}
                     onChange={(e) =>

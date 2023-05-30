@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import { sudokuGenerator } from "./utils/sudokuGenerator";
 import GameGrid from "./components/GameGrid";
