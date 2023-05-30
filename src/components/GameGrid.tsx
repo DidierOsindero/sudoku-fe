@@ -7,14 +7,15 @@ interface IGameGridProps {
 
 export default function GameGrid({ gameGrid, setGameGrid }: IGameGridProps) {
   const updateGrid = (val: string, rowIdx: number, columnIdx: number) => {
-    const gameGridCopy = [...gameGrid];
-    gameGridCopy[rowIdx] = [...gameGrid[rowIdx]];
-    gameGridCopy[rowIdx][columnIdx].val = val;
-    setGameGrid(gameGridCopy);
+    if (/[1-9]/.test(val) || val === "") {
+      const gameGridCopy = [...gameGrid];
+      gameGridCopy[rowIdx] = [...gameGrid[rowIdx]];
+      gameGridCopy[rowIdx][columnIdx].val = val;
+      setGameGrid(gameGridCopy);
+    }
   };
   return (
     <>
-      <h1>Game Grid</h1>
       <div className="grid-container">
         {gameGrid.map((row, rowIdx) => {
           return (
