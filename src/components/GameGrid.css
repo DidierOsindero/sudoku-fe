@@ -1,10 +1,40 @@
 .grid-container {
   display: grid;
   grid-template-columns: auto;
+
+  border-left: 1px solid black;
+  border-top: 1px solid black;
 }
 
 .grid-row {
   display: grid;
   grid-template-columns: repeat(9, 1fr);
-  border: 1px solid black;
+  border-bottom: 1px solid gray;
+}
+
+.grid-row:nth-child(2n) {
+  border-bottom: 4px solid red;
+}
+
+.grid-cell {
+  /*
+    Get rid of presets on input tags
+  */
+  border: 0;
+  outline: none;
+  padding: 0;
+  font: inherit;
+
+  /*
+    Actual Styling
+  */
+  border-right: 1px solid gray;
+  width: 3rem;
+  height: 3rem;
+  text-align: center;
+  font-size: 2em;
+}
+
+.grid-cell:nth-child(3n) {
+  border-right: 1px solid black;
 }

@@ -13,8 +13,10 @@ export default function GameGrid({ gameGrid }: IGameGridProps) {
             <div key={idx}>
               <div className="grid-row">
                 {row.map((cell, pos) => {
-                  return (
-                    <div className="grid-cell" key={pos}>
+                  return cell === "." ? (
+                    <input className="grid-cell" key={pos} maxLength={1} />
+                  ) : (
+                    <div className="grid-cell preset-num" key={pos}>
                       {cell}
                     </div>
                   );
