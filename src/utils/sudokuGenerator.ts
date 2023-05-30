@@ -1,10 +1,22 @@
 import { solveSudoku } from "./solveSudoku";
+import { ICell } from "./types";
 
-export const sudokuGenerator = (): string[][] => {
+export const sudokuGenerator = (): ICell[][] => {
   //Create the board
-  const board = Array(9);
+  const board: ICell[][] = Array(9);
+  const cellTemplate: ICell = { val: ".", status: "pre-defined" };
   for (let i = 0; i < 9; i++) {
-    board[i] = Array(9).fill(".");
+    board[i] = [
+      { ...cellTemplate },
+      { ...cellTemplate },
+      { ...cellTemplate },
+      { ...cellTemplate },
+      { ...cellTemplate },
+      { ...cellTemplate },
+      { ...cellTemplate },
+      { ...cellTemplate },
+      { ...cellTemplate },
+    ];
   }
 
   //Fill first three boxes
@@ -17,12 +29,12 @@ export const sudokuGenerator = (): string[][] => {
   return board;
 };
 
-const fillBox = (board: string[][], row: number, column: number) => {
+const fillBox = (board: ICell[][], row: number, column: number) => {
   let nums = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   for (let i = 0; i < 9; i++) {
-    board[row][column] =
+    board[row][column].val =
       nums[Math.floor(Math.random() * nums.length)].toString();
-    nums = nums.filter((item) => item.toString() !== board[row][column]);
+    nums = nums.filter((item) => item.toString() !== board[row][column].val);
     if (!((column + 1) % 3)) {
       row++;
       column = Math.floor(column / 3) * 3;
@@ -30,14 +42,15 @@ const fillBox = (board: string[][], row: number, column: number) => {
   }
 };
 
-const removeNums = (board: string[][], amount: number) => {
+const removeNums = (board: ICell[][], amount: number) => {
   for (let i = 0; i < amount; i++) {
     let rand1 = Math.floor(Math.random() * 9);
     let rand2 = Math.floor(Math.random() * 9);
-    while (board[rand1][rand2] === ".") {
+    while (board[rand1][rand2].val === ".") {
       rand1 = Math.floor(Math.random() * 9);
       rand2 = Math.floor(Math.random() * 9);
     }
-    board[rand1][rand2] = ".";
+    board[rand1][rand2].val = ".";
+    board[rand1][rand2].status = "user-defined";
   }
 };

@@ -1,15 +1,15 @@
 import { ICell } from "../utils/types";
 import "./GameGrid.css";
 interface IGameGridProps {
-  gameGrid: string[][];
-  setGameGrid: React.Dispatch<React.SetStateAction<string[][]>>;
+  gameGrid: ICell[][];
+  setGameGrid: React.Dispatch<React.SetStateAction<ICell[][]>>;
 }
 
 export default function GameGrid({ gameGrid, setGameGrid }: IGameGridProps) {
   const updateGrid = (val: string, rowIdx: number, columnIdx: number) => {
     const gameGridCopy = [...gameGrid];
     gameGridCopy[rowIdx] = [...gameGrid[rowIdx]];
-    gameGridCopy[rowIdx][columnIdx] = val;
+    gameGridCopy[rowIdx][columnIdx].val = val;
     setGameGrid(gameGridCopy);
   };
   return (
@@ -20,10 +20,10 @@ export default function GameGrid({ gameGrid, setGameGrid }: IGameGridProps) {
           return (
             <div key={rowIdx} className="grid-row">
               {row.map((cell, columnIdx) => {
-                return cell === "." ? (
+                return cell.status === "user-defined" ? (
                   <input
                     className="grid-cell"
-                    value={gameGrid[rowIdx][columnIdx]}
+                    value={gameGrid[rowIdx][columnIdx].val}
                     key={columnIdx}
                     maxLength={1}
                     onChange={(e) =>
@@ -32,7 +32,7 @@ export default function GameGrid({ gameGrid, setGameGrid }: IGameGridProps) {
                   />
                 ) : (
                   <div className="grid-cell preset-num" key={columnIdx}>
-                    {cell}
+                    {cell.val}
                   </div>
                 );
               })}
