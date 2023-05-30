@@ -1,3 +1,4 @@
+import { ICell } from "../utils/types";
 import "./GameGrid.css";
 interface IGameGridProps {
   gameGrid: string[][];

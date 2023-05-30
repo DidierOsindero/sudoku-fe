@@ -1,15 +1,18 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./App.css";
 import { sudokuGenerator } from "./utils/sudokuGenerator";
 import GameGrid from "./components/GameGrid";
+import { ICell } from "./utils/types";
 
 function App() {
   //Handler to generate new sudoku grid:
   const generateGrid = () => {
-    setGameGrid(sudokuGenerator());
+    const generatedGrid = sudokuGenerator();
+    setGameGrid(generatedGrid);
   };
+
   //Generate new Sudoku on-mount
-  const [gameGrid, setGameGrid] = useState<string[][]>([]);
+  const [gameGrid, setGameGrid] = useState<ICell[][]>([]);
   useEffect(() => {
     generateGrid();
   }, []);
@@ -19,7 +22,7 @@ function App() {
   return (
     <>
       <h1>Sudoku</h1>
-      {gameGrid && <GameGrid gameGrid={gameGrid} />}
+      {gameGrid && <GameGrid gameGrid={gameGrid} setGameGrid={setGameGrid} />}
     </>
   );
 }

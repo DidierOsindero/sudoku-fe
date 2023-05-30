@@ -1,15 +1,5 @@
 import { isValidCell } from "./isValidSudoku";
 
-/*
-PSEUDOCODE:
-- Iterate through board (single for loop)
-- if board[row][column] is empty => for each possible number (1-9):
-    - Check if current board[row][column] is valid
-    - if so call recursively call the solve function on the next board[row][column] along (next column)
-    - if the next COLUMN + 1 > 8 then call it on COLUMN 0 and ROW + 1
-    - if COLUMN = 8 and ROW = 8 and isValid - return 
-*/
-
 export function solveSudoku(
   board: string[][],
   row: number = 0,
