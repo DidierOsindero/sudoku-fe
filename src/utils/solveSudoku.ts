@@ -35,14 +35,12 @@ export function solveSudoku(
         ) === false
       ) {
         board[row][column].val = ".";
-        board[row][column].status = "user-defined";
       } else return true;
     }
   }
 
   if (row === 0 && column === 0) return true;
   board[row][column].val = ".";
-  board[row][column].status = "user-defined";
   return false;
 }
 

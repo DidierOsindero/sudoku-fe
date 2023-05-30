@@ -26,6 +26,13 @@ export const sudokuGenerator = (): ICell[][] => {
 
   solveSudoku(board);
   removeNums(board, 64);
+
+  //Assign correct status
+  board.forEach((row) => {
+    row.forEach((cell) => {
+      if (cell.val === ".") cell.status = "user-defined";
+    });
+  });
   return board;
 };
 
@@ -51,6 +58,5 @@ const removeNums = (board: ICell[][], amount: number) => {
       rand2 = Math.floor(Math.random() * 9);
     }
     board[rand1][rand2].val = ".";
-    board[rand1][rand2].status = "user-defined";
   }
 };
