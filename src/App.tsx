@@ -21,7 +21,7 @@ function App() {
 
   return (
     <>
-      <h1>Sudoku</h1>
+      <h1 className="title">Sudoku</h1>
       {gameGrid && <GameGrid gameGrid={gameGrid} setGameGrid={setGameGrid} />}
     </>
   );
