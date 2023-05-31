@@ -40,13 +40,13 @@ function App() {
       {gameGrid && <GameGrid gameGrid={gameGrid} setGameGrid={setGameGrid} />}
       <button
         className={isComplete ? "submit-btn" : "check-btn"}
-        onSubmit={handleCheckSubmit}
+        onClick={handleCheckSubmit}
       >
         {isComplete ? "Submit" : "Check"}
       </button>
 
       {/* End Game Modal */}
-      {<EndGameModal gameGrid={gameGrid} />}
+      {isEndOfGame && <EndGameModal gameGrid={gameGrid} />}
     </div>
   );
 }
