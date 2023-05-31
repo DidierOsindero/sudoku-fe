@@ -4,6 +4,7 @@ import { sudokuGenerator } from "./utils/sudokuGenerator";
 import GameGrid from "./components/GameGrid";
 import { ICell } from "./utils/types";
 import EndGameModal from "./components/EndGameModal";
+import { checkGrid } from "./utils/checkGrid";
 
 function App() {
   //Handler to generate new sudoku grid:
@@ -25,19 +26,31 @@ function App() {
 
   //Handler for check/submit button
   const [isEndOfGame, setIsEndOfGame] = useState(false);
+  const [clashArr, setClashArr] = useState<string[]>([]);
   const handleCheckSubmit = () => {
     if (isComplete) {
       setIsEndOfGame(true);
+    } else {
+      console.log(checkGrid(gameGrid));
+      setClashArr(checkGrid(gameGrid));
     }
-    /*
-    TODO - Create a version of is valid sudoku which identifies all incorrect pieces
-    */
   };
+
+  //Reset Clash Array when game grid is updated
+  useEffect(() => {
+    setClashArr([]);
+  }, [gameGrid]);
 
   return (
     <div className="app">
       <h1 className="title">Sudoku</h1>
-      {gameGrid && <GameGrid gameGrid={gameGrid} setGameGrid={setGameGrid} />}
+      {gameGrid && (
+        <GameGrid
+          gameGrid={gameGrid}
+          setGameGrid={setGameGrid}
+          clashArr={clashArr}
+        />
+      )}
       <button
         className={isComplete ? "submit-btn" : "check-btn"}
         onClick={handleCheckSubmit}

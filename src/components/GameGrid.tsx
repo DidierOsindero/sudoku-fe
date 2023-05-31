@@ -3,12 +3,18 @@ import "./GameGrid.css";
 interface IGameGridProps {
   gameGrid: ICell[][];
   setGameGrid: React.Dispatch<React.SetStateAction<ICell[][]>>;
+  clashArr: string[];
 }
 
-export default function GameGrid({ gameGrid, setGameGrid }: IGameGridProps) {
+export default function GameGrid({
+  gameGrid,
+  setGameGrid,
+  clashArr,
+}: IGameGridProps) {
   const updateGrid = (val: string, rowIdx: number, columnIdx: number) => {
     if (/[1-9]/.test(val) || val === "") {
       const gameGridCopy = [...gameGrid];
+
       gameGridCopy[rowIdx] = [...gameGrid[rowIdx]];
       gameGridCopy[rowIdx][columnIdx].val = val;
       setGameGrid(gameGridCopy);
@@ -21,9 +27,15 @@ export default function GameGrid({ gameGrid, setGameGrid }: IGameGridProps) {
           return (
             <div key={rowIdx} className="grid-row">
               {row.map((cell, columnIdx) => {
+                //Check to see if cell is included in clash array
+                const isClashing = clashArr.length
+                  ? clashArr.includes(`${rowIdx}${columnIdx}`)
+                  : false;
                 return cell.status === "user-defined" ? (
                   <input
-                    className="grid-cell"
+                    className={
+                      isClashing ? "grid-cell clashing-cell" : "grid-cell"
+                    }
                     value={
                       //If the cell is "." show nothing
                       gameGrid[rowIdx][columnIdx].val !== "."
@@ -37,7 +49,14 @@ export default function GameGrid({ gameGrid, setGameGrid }: IGameGridProps) {
                     }
                   />
                 ) : (
-                  <div className="grid-cell preset-num" key={columnIdx}>
+                  <div
+                    className={
+                      isClashing
+                        ? "grid-cell clashing-cell preset-num"
+                        : "grid-cell preset-num"
+                    }
+                    key={columnIdx}
+                  >
                     {cell.val}
                   </div>
                 );

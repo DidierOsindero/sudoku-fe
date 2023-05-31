@@ -42,6 +42,10 @@
   border-right: 2px solid black;
 }
 
+.clashing-cell {
+  text-decoration: underline;
+}
+
 .preset-num {
   color: dimgrey;
 }
