@@ -68,3 +68,15 @@
 .submit-btn:active {
   background-color: rgb(7, 182, 36);
 }
+
+.check-mode-colour {
+  background-color: rgb(96, 230, 185);
+}
+
+.check-mode-colour:focus {
+  background-color: rgb(96, 230, 185);
+}
+
+.check-mode-colour:active {
+  background-color: rgb(78, 196, 156);
+}
