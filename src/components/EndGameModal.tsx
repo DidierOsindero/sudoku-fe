@@ -12,8 +12,13 @@ export default function EndGameModal({
   const isCorrect = isValidSudoku(gameGrid);
   return (
     <div className="modal">
-      {isCorrect && <h2>Well Done!</h2>}{" "}
-      {!isCorrect && <h2>Better luck next time!</h2>}
+      <div className="inner-modal">
+        {isCorrect && <h2 className="inner-modal-title">Well Done!</h2>}{" "}
+        {!isCorrect && (
+          <h2 className="inner-modal-title">Better luck next time!</h2>
+        )}
+        <button className="play-again-btn">Play Again</button>
+      </div>
     </div>
   );
 }
