@@ -4,12 +4,14 @@ interface IGameGridProps {
   gameGrid: ICell[][];
   setGameGrid: React.Dispatch<React.SetStateAction<ICell[][]>>;
   clashArr: string[];
+  isCheckMode: boolean;
 }
 
 export default function GameGrid({
   gameGrid,
   setGameGrid,
   clashArr,
+  isCheckMode,
 }: IGameGridProps) {
   const updateGrid = (val: string, rowIdx: number, columnIdx: number) => {
     if (/[1-9]/.test(val) || val === "") {
@@ -28,9 +30,10 @@ export default function GameGrid({
             <div key={rowIdx} className="grid-row">
               {row.map((cell, columnIdx) => {
                 //Check to see if cell is included in clash array
-                const isClashing = clashArr.length
-                  ? clashArr.includes(`${rowIdx}${columnIdx}`)
-                  : false;
+                const isClashing =
+                  clashArr.length && isCheckMode
+                    ? clashArr.includes(`${rowIdx}${columnIdx}`)
+                    : false;
                 return cell.status === "user-defined" ? (
                   <input
                     className={
@@ -51,7 +54,7 @@ export default function GameGrid({
                 ) : (
                   <div
                     className={
-                      isClashing
+                      isClashing && isCheckMode
                         ? "grid-cell clashing-cell preset-num"
                         : "grid-cell preset-num"
                     }

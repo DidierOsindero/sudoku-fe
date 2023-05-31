@@ -38,8 +38,18 @@ function App() {
 
   //Reset Clash Array when game grid is updated
   useEffect(() => {
-    setClashArr([]);
+    if (gameGrid.length) setClashArr(checkGrid(gameGrid));
   }, [gameGrid]);
+
+  // State to track check mode
+  const [isCheckMode, setIsCheckMode] = useState(false);
+
+  //Handle Play Again
+  const handlePlayAgain = () => {
+    setClashArr([]);
+    generateGrid();
+    setIsEndOfGame(false);
+  };
 
   return (
     <div className="app">
@@ -49,17 +59,30 @@ function App() {
           gameGrid={gameGrid}
           setGameGrid={setGameGrid}
           clashArr={clashArr}
+          isCheckMode={isCheckMode}
         />
       )}
-      <button
-        className={isComplete ? "submit-btn" : "check-btn"}
-        onClick={handleCheckSubmit}
-      >
-        {isComplete ? "Submit" : "Check"}
-      </button>
+
+      {/* Submit button */}
+      {isComplete && (
+        <button className="submit-btn" onClick={handleCheckSubmit}>
+          Submit
+        </button>
+      )}
+      {/* Check Toggle */}
+      {!isComplete && (
+        <button
+          className={isCheckMode ? "check-btn check-mode-colour" : "check-btn"}
+          onClick={() => setIsCheckMode((prev) => !prev)}
+        >
+          {isCheckMode ? "Don't check!" : "Check"}
+        </button>
+      )}
 
       {/* End Game Modal */}
-      {isEndOfGame && <EndGameModal gameGrid={gameGrid} />}
+      {isEndOfGame && (
+        <EndGameModal gameGrid={gameGrid} handlePlayAgain={handlePlayAgain} />
+      )}
     </div>
   );
 }

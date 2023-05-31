@@ -4,10 +4,12 @@ import "./EndGameModal.css";
 
 interface IEndGameModalProps {
   gameGrid: ICell[][];
+  handlePlayAgain: () => void;
 }
 
 export default function EndGameModal({
   gameGrid,
+  handlePlayAgain,
 }: IEndGameModalProps): JSX.Element {
   const isCorrect = isValidSudoku(gameGrid);
   return (
@@ -17,7 +19,9 @@ export default function EndGameModal({
         {!isCorrect && (
           <h2 className="inner-modal-title">Better luck next time!</h2>
         )}
-        <button className="play-again-btn">Play Again</button>
+        <button className="play-again-btn" onClick={handlePlayAgain}>
+          Play Again
+        </button>
       </div>
     </div>
   );
