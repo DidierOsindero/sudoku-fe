@@ -25,7 +25,7 @@ export const sudokuGenerator = (): ICell[][] => {
   fillBox(board, 6, 6);
 
   solveSudoku(board);
-  removeNums(board, 64);
+  removeNums(board, 55);
 
   //Assign correct status
   board.forEach((row) => {

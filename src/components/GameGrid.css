@@ -1,5 +1,5 @@
 .grid-container {
-  margin: 2rem;
+  margin: 1rem;
   display: grid;
   grid-template-columns: auto;
 
@@ -31,8 +31,8 @@
     Actual Styling
   */
   border-right: 1px solid gray;
-  width: 3rem;
-  height: 3rem;
+  width: 4rem;
+  height: 4rem;
   text-align: center;
   font-size: 2em;
   caret-color: palegoldenrod;
@@ -43,9 +43,50 @@
 }
 
 .clashing-cell {
-  text-decoration: underline;
+  animation: pop 600ms ease forwards;
 }
 
 .preset-num {
   color: dimgrey;
+}
+
+@keyframes pop {
+  0% {
+    color: rgba(255, 0, 0, 0.296);
+    text-decoration-color: rgba(255, 0, 0, 0);
+    transition: all;
+  }
+
+  25% {
+    color: rgba(255, 0, 0, 0.411);
+    text-decoration-color: rgba(255, 0, 0, 0.31);
+    transition: all;
+  }
+
+  37% {
+    color: rgba(255, 0, 0, 0.604);
+    transition: all;
+  }
+
+  50% {
+    color: rgba(255, 0, 0, 0.75);
+    text-decoration-color: rgba(255, 0, 0, 0.553);
+    transition: all;
+  }
+
+  63% {
+    color: rgba(255, 0, 0, 0.604);
+    transition: all;
+  }
+
+  75% {
+    color: rgba(255, 0, 0, 0.411);
+    text-decoration-color: rgba(255, 0, 0, 0.7);
+    transition: all;
+  }
+
+  100% {
+    text-decoration: underline rgba(255, 0, 0, 0.731) dotted 0.12em;
+    transition: all;
+  }
 }
