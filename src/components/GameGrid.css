@@ -36,6 +36,7 @@
   text-align: center;
   font-size: 2em;
   caret-color: palegoldenrod;
+  line-height: 200%;
 }
 
 .grid-cell:nth-child(3n) {
