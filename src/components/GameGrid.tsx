@@ -34,34 +34,49 @@ export default function GameGrid({
                   clashArr.length && isCheckMode
                     ? clashArr.includes(`${rowIdx}${columnIdx}`)
                     : false;
-                return cell.status === "user-defined" ? (
-                  <input
-                    className={
-                      isClashing ? "grid-cell clashing-cell" : "grid-cell"
-                    }
-                    value={
-                      //If the cell is "." show nothing
-                      gameGrid[rowIdx][columnIdx].val !== "."
-                        ? gameGrid[rowIdx][columnIdx].val
-                        : ""
-                    }
-                    key={columnIdx}
-                    maxLength={1}
-                    onChange={(e) =>
-                      updateGrid(e.target.value, rowIdx, columnIdx)
-                    }
-                  />
-                ) : (
-                  <div
-                    className={
-                      isClashing && isCheckMode
-                        ? "grid-cell clashing-cell preset-num"
-                        : "grid-cell preset-num"
-                    }
-                    key={columnIdx}
-                  >
-                    {cell.val}
-                  </div>
+                return (
+                  <>
+                    {cell.status === "user-defined" && (
+                      <input
+                        className={`grid-cell ${
+                          isClashing && "clashing-cell"
+                        } `}
+                        value={
+                          //If the cell is "." show nothing
+                          gameGrid[rowIdx][columnIdx].val !== "."
+                            ? gameGrid[rowIdx][columnIdx].val
+                            : ""
+                        }
+                        key={columnIdx}
+                        maxLength={1}
+                        onChange={(e) =>
+                          updateGrid(e.target.value, rowIdx, columnIdx)
+                        }
+                      />
+                    )}
+
+                    {cell.status === "pre-defined" && (
+                      <div
+                        className={`grid-cell preset-num ${
+                          isClashing && isCheckMode && "clashing-cell"
+                        } `}
+                        key={columnIdx}
+                      >
+                        {cell.val}
+                      </div>
+                    )}
+
+                    {cell.status === "hint" && (
+                      <div
+                        className={`grid-cell hint ${
+                          isClashing && isCheckMode && "clashing-cell"
+                        } `}
+                        key={columnIdx}
+                      >
+                        {cell.val}
+                      </div>
+                    )}
+                  </>
                 );
               })}
             </div>

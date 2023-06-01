@@ -1,7 +1,7 @@
 import { solveSudoku } from "./solveSudoku";
 import { ICell } from "./types";
 
-export const sudokuGenerator = (): ICell[][] => {
+export const sudokuGenerator = (): { target: ICell[][]; board: ICell[][] } => {
   //Create the board
   const board: ICell[][] = Array(9);
   const cellTemplate: ICell = { val: ".", status: "pre-defined" };
@@ -25,6 +25,17 @@ export const sudokuGenerator = (): ICell[][] => {
   fillBox(board, 6, 6);
 
   solveSudoku(board);
+
+  //Create target board (copy of filled board)
+  const target = [...board];
+  for (let i = 0; i < 9; i++) {
+    target[i] = [...board[i]];
+    for (let j = 0; j < 9; j++) {
+      target[i][j] = { ...board[i][j] };
+    }
+  }
+
+  //Remove nums from board
   removeNums(board, 55);
 
   //Assign correct status
@@ -33,7 +44,9 @@ export const sudokuGenerator = (): ICell[][] => {
       if (cell.val === ".") cell.status = "user-defined";
     });
   });
-  return board;
+
+  //Return object with target and board to fill in
+  return { target, board };
 };
 
 const fillBox = (board: ICell[][], row: number, column: number) => {

@@ -10,11 +10,14 @@ function App() {
   //Handler to generate new sudoku grid:
   const generateGrid = () => {
     const generatedGrid = sudokuGenerator();
-    setGameGrid(generatedGrid);
+    //Return an object with target and attempt
+    setGameGrid(generatedGrid.board);
+    setTargetGrid(generatedGrid.target);
   };
 
   //Generate new Sudoku on-mount
   const [gameGrid, setGameGrid] = useState<ICell[][]>([]);
+  const [targetGrid, setTargetGrid] = useState<ICell[][]>([]);
   useEffect(() => {
     generateGrid();
   }, []);
@@ -34,6 +37,23 @@ function App() {
       console.log(checkGrid(gameGrid));
       setClashArr(checkGrid(gameGrid));
     }
+  };
+
+  //Handler for hint buttn
+  const handleHint = (row: number, column: number) => {
+    const prev = { ...gameGrid[row][column] };
+    const gameGridCopy = [...gameGrid];
+    gameGridCopy[row] = [...gameGrid[row]];
+    gameGridCopy[row][column] = { ...targetGrid[row][column] };
+    gameGridCopy[row][column].status = "hint";
+    setGameGrid(gameGridCopy);
+
+    setTimeout(() => {
+      const gameGridCopy = [...gameGrid];
+      gameGridCopy[row] = [...gameGrid[row]];
+      gameGridCopy[row][column] = { ...prev };
+      setGameGrid(gameGridCopy);
+    }, 5000);
   };
 
   //Reset Clash Array when game grid is updated
@@ -79,6 +99,17 @@ function App() {
         </button>
       )}
 
+      {/* Hint Button */}
+      {
+        <button
+          className="submit-btn"
+          onClick={() => {
+            handleHint(0, 0);
+          }}
+        >
+          Hint
+        </button>
+      }
       {/* End Game Modal */}
       {isEndOfGame && (
         <EndGameModal gameGrid={gameGrid} handlePlayAgain={handlePlayAgain} />
