@@ -10,7 +10,8 @@
 }
 
 .check-btn,
-.submit-btn {
+.submit-btn,
+.hint-btn {
   align-items: center;
   background-clip: padding-box;
   background-color: #fa6400;
@@ -44,10 +45,16 @@
   background-color: rgb(13, 201, 44);
 }
 
+.hint-btn {
+  background-color: rgba(232, 216, 43, 0.86);
+}
+
 .check-btn:hover,
 .check-btn:focus,
 .submit-btn:hover,
-.submit-btn:focus {
+.submit-btn:focus,
+.hint-btn:hover,
+.hint-btn:focus {
   background-color: #fb8332;
   box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
 }
@@ -57,13 +64,20 @@
   background-color: rgb(12, 225, 48);
 }
 
+.hint-btn:hover,
+.hint-btn:focus {
+  background-color: rgba(232, 213, 7, 0.86);
+}
+
 .check-btn:hover,
-.submit-btn:hover {
+.submit-btn:hover,
+.hint-btn:hover {
   transform: translateY(-1px);
 }
 
 .check-btn:active,
-.submit-btn:active {
+.submit-btn:active,
+.hint-btn:active {
   background-color: #c85000;
   box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px;
   transform: translateY(0);
@@ -71,6 +85,10 @@
 
 .submit-btn:active {
   background-color: rgb(7, 182, 36);
+}
+
+.hint-btn:active {
+  background-color: rgba(232, 213, 7, 0.924);
 }
 
 .check-mode-colour {

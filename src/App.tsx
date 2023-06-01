@@ -40,7 +40,19 @@ function App() {
   };
 
   //Handler for hint buttn
-  const handleHint = (row: number, column: number) => {
+  const [isHint, setIsHint] = useState(false);
+  const handleHint = () => {
+    setIsHint(true);
+    let row = Math.floor(Math.random() * 9);
+    let column = Math.floor(Math.random() * 9);
+
+    while (
+      /[1-9]/.test(gameGrid[row][column].val) ||
+      gameGrid[row][column] === undefined
+    ) {
+      row = Math.floor(Math.random() * 9);
+      column = Math.floor(Math.random() * 9);
+    }
     const prev = { ...gameGrid[row][column] };
     const gameGridCopy = [...gameGrid];
     gameGridCopy[row] = [...gameGrid[row]];
@@ -49,10 +61,12 @@ function App() {
     setGameGrid(gameGridCopy);
 
     setTimeout(() => {
+      console.log("Set timeout running");
       const gameGridCopy = [...gameGrid];
       gameGridCopy[row] = [...gameGrid[row]];
       gameGridCopy[row][column] = { ...prev };
       setGameGrid(gameGridCopy);
+      setIsHint(false);
     }, 5000);
   };
 
@@ -102,10 +116,11 @@ function App() {
       {/* Hint Button */}
       {
         <button
-          className="submit-btn"
+          className="hint-btn"
           onClick={() => {
-            handleHint(0, 0);
+            handleHint();
           }}
+          disabled={isHint}
         >
           Hint
         </button>
