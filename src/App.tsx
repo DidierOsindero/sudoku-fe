@@ -120,7 +120,7 @@ function App() {
           onClick={() => {
             handleHint();
           }}
-          disabled={isHint}
+          disabled={isHint || isComplete}
         >
           Hint
         </button>
