@@ -8,8 +8,8 @@ import { checkGrid } from "./utils/checkGrid";
 
 function App() {
   //Handler to generate new sudoku grid:
-  const generateGrid = () => {
-    const generatedGrid = sudokuGenerator();
+  const generateGrid = (filledInCells: number = 35) => {
+    const generatedGrid = sudokuGenerator(filledInCells);
     //Return an object with target and attempt
     setGameGrid(generatedGrid.board);
     setTargetGrid(generatedGrid.target);
@@ -19,7 +19,7 @@ function App() {
   const [gameGrid, setGameGrid] = useState<ICell[][]>([]);
   const [targetGrid, setTargetGrid] = useState<ICell[][]>([]);
   useEffect(() => {
-    generateGrid();
+    generateGrid(50);
   }, []);
 
   //Check if grid is completely filled in
