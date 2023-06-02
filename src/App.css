@@ -5,38 +5,100 @@
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.title {
+  color: orange;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.check-btn,
+.submit-btn,
+.hint-btn {
+  align-items: center;
+  background-clip: padding-box;
+  background-color: #fa6400;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+  box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: system-ui, -apple-system, system-ui, "Helvetica Neue", Helvetica,
+    Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  justify-content: center;
+  line-height: 1.25;
+  margin-right: 2em;
+  min-height: 3rem;
+  padding: calc(0.875rem - 1px) calc(1.5rem - 1px);
+  position: relative;
+  text-decoration: none;
+  transition: all 250ms;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+  width: auto;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.submit-btn {
+  background-color: rgb(13, 201, 44);
 }
 
-.card {
-  padding: 2em;
+.hint-btn {
+  background-color: rgba(232, 216, 43, 0.86);
 }
 
-.read-the-docs {
-  color: #888;
+.check-btn:hover,
+.check-btn:focus,
+.submit-btn:hover,
+.submit-btn:focus,
+.hint-btn:hover,
+.hint-btn:focus {
+  background-color: #fb8332;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+}
+
+.submit-btn:hover,
+.submit-btn:focus {
+  background-color: rgb(12, 225, 48);
+}
+
+.hint-btn:hover,
+.hint-btn:focus {
+  background-color: rgba(232, 213, 7, 0.86);
+}
+
+.check-btn:hover,
+.submit-btn:hover,
+.hint-btn:hover {
+  transform: translateY(-1px);
+}
+
+.check-btn:active,
+.submit-btn:active,
+.hint-btn:active {
+  background-color: #c85000;
+  box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px;
+  transform: translateY(0);
+}
+
+.submit-btn:active {
+  background-color: rgb(7, 182, 36);
+}
+
+.hint-btn:active {
+  background-color: rgba(232, 213, 7, 0.924);
+}
+
+.check-mode-colour {
+  background-color: rgb(96, 230, 185);
+}
+
+.check-mode-colour:focus {
+  background-color: rgb(96, 230, 185);
+}
+
+.check-mode-colour:active {
+  background-color: rgb(78, 196, 156);
 }
