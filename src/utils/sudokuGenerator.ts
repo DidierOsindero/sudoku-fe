@@ -1,7 +1,10 @@
+import { checkForUniqueSolution } from "./checkForUniqueSolution";
 import { solveSudoku } from "./solveSudoku";
 import { ICell } from "./types";
 
-export const sudokuGenerator = (): { target: ICell[][]; board: ICell[][] } => {
+export const sudokuGenerator = (
+  totalToRemove: number = 35
+): { target: ICell[][]; board: ICell[][] } => {
   //Create the board
   const board: ICell[][] = Array(9);
   const cellTemplate: ICell = { val: ".", status: "pre-defined" };
@@ -25,8 +28,7 @@ export const sudokuGenerator = (): { target: ICell[][]; board: ICell[][] } => {
   fillBox(board, 6, 6);
 
   solveSudoku(board);
-
-  //Create target board (copy of filled board)
+  //Create target
   const target = [...board];
   for (let i = 0; i < 9; i++) {
     target[i] = [...board[i]];
@@ -34,9 +36,7 @@ export const sudokuGenerator = (): { target: ICell[][]; board: ICell[][] } => {
       target[i][j] = { ...board[i][j] };
     }
   }
-
-  //Remove nums from board
-  removeNums(board, 55);
+  removeNums(board, 81 - totalToRemove);
 
   //Assign correct status
   board.forEach((row) => {
@@ -45,7 +45,6 @@ export const sudokuGenerator = (): { target: ICell[][]; board: ICell[][] } => {
     });
   });
 
-  //Return object with target and board to fill in
   return { target, board };
 };
 
@@ -63,6 +62,7 @@ const fillBox = (board: ICell[][], row: number, column: number) => {
 };
 
 const removeNums = (board: ICell[][], amount: number) => {
+  //Choose random nums to remove, if it means solutions are more than one try again
   for (let i = 0; i < amount; i++) {
     let rand1 = Math.floor(Math.random() * 9);
     let rand2 = Math.floor(Math.random() * 9);
@@ -70,6 +70,20 @@ const removeNums = (board: ICell[][], amount: number) => {
       rand1 = Math.floor(Math.random() * 9);
       rand2 = Math.floor(Math.random() * 9);
     }
+    const temp = board[rand1][rand2].val;
     board[rand1][rand2].val = ".";
+
+    //Create copy of board to test
+    const copy = [...board];
+    for (let i = 0; i < 9; i++) {
+      copy[i] = [...board[i]];
+      for (let j = 0; j < 9; j++) {
+        copy[i][j] = { ...board[i][j] };
+      }
+    }
+    if (!checkForUniqueSolution(copy)) {
+      board[rand1][rand2].val = temp;
+      i--;
+    }
   }
 };
