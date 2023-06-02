@@ -4,11 +4,7 @@ import { ICell } from "./types";
 export function checkForUniqueSolution(board: ICell[][]): boolean {
   const allSolutions: ICell[][][] = [];
   solve(board);
-  function solve(
-    board: ICell[][],
-    row: number = 0,
-    column: number = 0
-  ): boolean {
+  function solve(board: ICell[][], row = 0, column = 0): boolean {
     //END if there is more than one solution
     if (allSolutions.length > 1) return true;
     // If last board[row][column] on board is reached and it is valid push to All solutions and increment choose another val

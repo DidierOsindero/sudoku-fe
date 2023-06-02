@@ -1,11 +1,7 @@
 import { isValidCell } from "./isValidSudoku";
 import { ICell } from "./types";
 
-export function solveSudoku(
-  board: ICell[][],
-  row: number = 0,
-  column: number = 0
-): boolean {
+export function solveSudoku(board: ICell[][], row = 0, column = 0): boolean {
   // Base case => return if last board[row][column] on board is reached and it is valid
   if (row === 8 && column === 8 && board[row][column].val !== ".") {
     return isValidCell(board, row, column);

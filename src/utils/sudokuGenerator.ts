@@ -3,7 +3,7 @@ import { solveSudoku } from "./solveSudoku";
 import { ICell } from "./types";
 
 export const sudokuGenerator = (
-  totalToRemove: number = 35
+  totalToRemove = 35
 ): { target: ICell[][]; board: ICell[][] } => {
   //Create the board
   const board: ICell[][] = Array(9);
