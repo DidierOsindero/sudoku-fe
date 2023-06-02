@@ -8,7 +8,7 @@ import { checkGrid } from "./utils/checkGrid";
 
 function App() {
   //Handler to generate new sudoku grid:
-  const generateGrid = (filledInCells: number = 35) => {
+  const generateGrid = (filledInCells = 35) => {
     const generatedGrid = sudokuGenerator(filledInCells);
     //Return an object with target and attempt
     setGameGrid(generatedGrid.board);

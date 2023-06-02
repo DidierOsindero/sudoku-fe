@@ -2,7 +2,7 @@ import { ICell } from "./types";
 
 export function isValidSudoku(board: ICell[][]): boolean {
   return board.every((row, rowIdx) => {
-    return row.every((cell, columnIdx) => {
+    return row.every((_, columnIdx) => {
       return isValidCell(board, rowIdx, columnIdx);
     });
   });
