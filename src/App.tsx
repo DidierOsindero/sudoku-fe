@@ -19,7 +19,7 @@ function App() {
   const [gameGrid, setGameGrid] = useState<ICell[][]>([]);
   const [targetGrid, setTargetGrid] = useState<ICell[][]>([]);
   useEffect(() => {
-    generateGrid(50);
+    generateGrid(30);
   }, []);
 
   //Check if grid is completely filled in

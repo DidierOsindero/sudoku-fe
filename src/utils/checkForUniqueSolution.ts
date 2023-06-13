@@ -50,7 +50,7 @@ export function checkForUniqueSolution(board: ICell[][]): boolean {
             }
           }
           allSolutions.push(copy);
-
+          board[row][column].val = "";
           return false;
         }
 
