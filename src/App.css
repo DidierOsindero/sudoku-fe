@@ -1,12 +1,12 @@
 #root {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
   text-align: center;
 }
 
 .title {
   color: orange;
+  margin-top: 0;
 }
 
 .check-btn,
@@ -49,8 +49,6 @@
   background-color: rgba(232, 216, 43, 0.86);
 }
 
-.check-btn:hover,
-.check-btn:focus,
 .submit-btn:hover,
 .submit-btn:focus,
 .hint-btn:hover,
@@ -75,7 +73,6 @@
   transform: translateY(-1px);
 }
 
-.check-btn:active,
 .submit-btn:active,
 .hint-btn:active {
   background-color: #c85000;
@@ -91,14 +88,22 @@
   background-color: rgba(232, 213, 7, 0.924);
 }
 
-.check-mode-colour {
+.check-btn {
   background-color: rgb(96, 230, 185);
+}
+
+.check-btn:hover {
+  box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+}
+
+.check-mode-colour {
+  background-color: #4332fb76;
 }
 
 .check-mode-colour:focus {
-  background-color: rgb(96, 230, 185);
+  background-color: #4332fb76;
 }
 
 .check-mode-colour:active {
-  background-color: rgb(78, 196, 156);
+  background-color: #4332fb76;
 }

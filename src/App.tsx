@@ -5,8 +5,36 @@ import GameGrid from "./components/GameGrid";
 import { ICell } from "./utils/types";
 import EndGameModal from "./components/EndGameModal";
 import { checkGrid } from "./utils/checkGrid";
+import StartGameModal from "./components/StartGameModal";
+
+export type Difficulty = "easy" | "medium" | "hard";
 
 function App() {
+  //Function to handle difficulty selection
+  const handleDifficulty = (difficulty: Difficulty) => {
+    switch (difficulty) {
+      case "easy":
+        const easyFilledInCells = Math.floor(Math.random() * 10) + 36;
+        generateGrid(easyFilledInCells);
+        break;
+      case "medium":
+        const mediumFilledInCells = Math.floor(Math.random() * 6) + 30;
+        generateGrid(mediumFilledInCells);
+        break;
+      case "hard":
+        const hardFilledInCells = Math.floor(Math.random() * 5) + 25;
+        generateGrid(hardFilledInCells);
+        break;
+      default:
+        generateGrid(30);
+    }
+  };
+
+  const handleBeginGame = (difficulty: Difficulty) => {
+    handleDifficulty(difficulty);
+    setIsStartOfGame(false);
+  };
+
   //Handler to generate new sudoku grid:
   const generateGrid = (filledInCells = 35) => {
     const generatedGrid = sudokuGenerator(filledInCells);
@@ -28,7 +56,9 @@ function App() {
   });
 
   //Handler for check/submit button
+  const [isStartOfGame, setIsStartOfGame] = useState(true);
   const [isEndOfGame, setIsEndOfGame] = useState(false);
+
   const [clashArr, setClashArr] = useState<string[]>([]);
   const handleCheckSubmit = () => {
     if (isComplete) {
@@ -39,7 +69,7 @@ function App() {
     }
   };
 
-  //Handler for hint buttn
+  //Handler for hint button
   const [isHint, setIsHint] = useState(false);
   const handleHint = () => {
     setIsHint(true);
@@ -81,7 +111,7 @@ function App() {
   //Handle Play Again
   const handlePlayAgain = () => {
     setClashArr([]);
-    generateGrid();
+    setIsStartOfGame(true);
     setIsEndOfGame(false);
   };
 
@@ -96,6 +126,9 @@ function App() {
           isCheckMode={isCheckMode}
         />
       )}
+
+      {/* Start Game Modal */}
+      {isStartOfGame && <StartGameModal handleBeginGame={handleBeginGame} />}
 
       {/* Submit button */}
       {isComplete && (
