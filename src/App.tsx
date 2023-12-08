@@ -8,6 +8,24 @@ import { checkGrid } from "./utils/checkGrid";
 import StartGameModal from "./components/StartGameModal";
 
 function App() {
+  const handleDifficulty = (difficulty: "easy" | "medium" | "hard") => {
+    switch (difficulty) {
+      case "easy":
+        const easyFilledInCells = Math.floor(Math.random() * 5) + 36;
+        generateGrid(easyFilledInCells);
+        break;
+      case "medium":
+        const mediumFilledInCells = Math.floor(Math.random() * 6) + 30;
+        generateGrid(mediumFilledInCells);
+        break;
+      case "hard":
+        const hardFilledInCells = Math.floor(Math.random() * 5) + 25;
+        generateGrid(hardFilledInCells);
+        break;
+      default:
+        generateGrid(30);
+    }
+  };
   //Handler to generate new sudoku grid:
   const generateGrid = (filledInCells = 35) => {
     const generatedGrid = sudokuGenerator(filledInCells);
@@ -40,7 +58,7 @@ function App() {
     }
   };
 
-  //Handler for hint buttn
+  //Handler for hint button
   const [isHint, setIsHint] = useState(false);
   const handleHint = () => {
     setIsHint(true);
@@ -98,7 +116,7 @@ function App() {
         />
       )}
 
-      <StartGameModal handlePlayAgain={handlePlayAgain} />
+      <StartGameModal handleDifficulty={handleDifficulty} />
 
       {/* Submit button */}
       {isComplete && (

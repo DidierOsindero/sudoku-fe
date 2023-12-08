@@ -1,11 +1,11 @@
 import "./StartGameModal.css";
 
 interface IEndGameModalProps {
-  handlePlayAgain: () => void;
+  handleDifficulty: (difficulty: "easy" | "medium" | "hard") => void;
 }
 
 export default function StartGameModal({
-  handlePlayAgain,
+  handleDifficulty,
 }: IEndGameModalProps): JSX.Element {
   return (
     <div className="modal">
@@ -15,18 +15,24 @@ export default function StartGameModal({
           Please select a difficulty level
         </p>
         <div className="flex-container">
-          <button className="difficulty-btn easy-btn" onClick={handlePlayAgain}>
+          <button
+            className="difficulty-btn easy-btn"
+            onClick={() => handleDifficulty("easy")}
+          >
             Easy
           </button>
 
           <button
             className="difficulty-btn medium-btn"
-            onClick={handlePlayAgain}
+            onClick={() => handleDifficulty("medium")}
           >
             Medium
           </button>
 
-          <button className="difficulty-btn hard-btn" onClick={handlePlayAgain}>
+          <button
+            className="difficulty-btn hard-btn"
+            onClick={() => handleDifficulty("hard")}
+          >
             Hard
           </button>
         </div>
