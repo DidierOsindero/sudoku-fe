@@ -1,4 +1,4 @@
-import { Difficulty } from "../App";
+import { Difficulty } from "../utils/types";
 import "./StartGameModal.css";
 
 interface IEndGameModalProps {

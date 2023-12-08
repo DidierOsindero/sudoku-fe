@@ -2,12 +2,10 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import { sudokuGenerator } from "./utils/sudokuGenerator";
 import GameGrid from "./components/GameGrid";
-import { ICell } from "./utils/types";
+import { Difficulty, ICell } from "./utils/types";
 import EndGameModal from "./components/EndGameModal";
 import { checkGrid } from "./utils/checkGrid";
 import StartGameModal from "./components/StartGameModal";
-
-export type Difficulty = "easy" | "medium" | "hard";
 
 function App() {
   //Function to handle difficulty selection
