@@ -3,7 +3,7 @@ import { solveSudoku } from "./solveSudoku";
 import { ICell } from "./types";
 
 export const sudokuGenerator = (
-  totalToRemove = 35
+  totalFilledCells = 35
 ): { target: ICell[][]; board: ICell[][] } => {
   //Create the board
   const board: ICell[][] = Array(9);
@@ -36,7 +36,7 @@ export const sudokuGenerator = (
       target[i][j] = { ...board[i][j] };
     }
   }
-  removeNums(board, 81 - totalToRemove);
+  removeNums(board, 81 - totalFilledCells);
 
   //Assign correct status
   board.forEach((row) => {
@@ -61,9 +61,9 @@ const fillBox = (board: ICell[][], row: number, column: number) => {
   }
 };
 
-const removeNums = (board: ICell[][], amount: number) => {
+const removeNums = (board: ICell[][], totalToRemove: number) => {
   //Choose random nums to remove, if it means solutions are more than one try again
-  for (let i = 0; i < amount; i++) {
+  for (let i = 0; i < totalToRemove; i++) {
     let rand1 = Math.floor(Math.random() * 9);
     let rand2 = Math.floor(Math.random() * 9);
     while (board[rand1][rand2].val === ".") {
