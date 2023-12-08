@@ -7,11 +7,14 @@ import EndGameModal from "./components/EndGameModal";
 import { checkGrid } from "./utils/checkGrid";
 import StartGameModal from "./components/StartGameModal";
 
+export type Difficulty = "easy" | "medium" | "hard";
+
 function App() {
-  const handleDifficulty = (difficulty: "easy" | "medium" | "hard") => {
+  //Function to handle difficulty selection
+  const handleDifficulty = (difficulty: Difficulty) => {
     switch (difficulty) {
       case "easy":
-        const easyFilledInCells = Math.floor(Math.random() * 5) + 36;
+        const easyFilledInCells = Math.floor(Math.random() * 10) + 36;
         generateGrid(easyFilledInCells);
         break;
       case "medium":
@@ -26,6 +29,12 @@ function App() {
         generateGrid(30);
     }
   };
+
+  const handleBeginGame = (difficulty: Difficulty) => {
+    handleDifficulty(difficulty);
+    setIsStartOfGame(false);
+  };
+
   //Handler to generate new sudoku grid:
   const generateGrid = (filledInCells = 35) => {
     const generatedGrid = sudokuGenerator(filledInCells);
@@ -47,7 +56,9 @@ function App() {
   });
 
   //Handler for check/submit button
+  const [isStartOfGame, setIsStartOfGame] = useState(true);
   const [isEndOfGame, setIsEndOfGame] = useState(false);
+
   const [clashArr, setClashArr] = useState<string[]>([]);
   const handleCheckSubmit = () => {
     if (isComplete) {
@@ -100,7 +111,7 @@ function App() {
   //Handle Play Again
   const handlePlayAgain = () => {
     setClashArr([]);
-    generateGrid();
+    setIsStartOfGame(true);
     setIsEndOfGame(false);
   };
 
@@ -116,7 +127,7 @@ function App() {
         />
       )}
 
-      <StartGameModal handleDifficulty={handleDifficulty} />
+      {isStartOfGame && <StartGameModal handleBeginGame={handleBeginGame} />}
 
       {/* Submit button */}
       {isComplete && (
