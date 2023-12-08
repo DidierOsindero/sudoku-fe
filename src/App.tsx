@@ -5,6 +5,7 @@ import GameGrid from "./components/GameGrid";
 import { ICell } from "./utils/types";
 import EndGameModal from "./components/EndGameModal";
 import { checkGrid } from "./utils/checkGrid";
+import StartGameModal from "./components/StartGameModal";
 
 function App() {
   //Handler to generate new sudoku grid:
@@ -96,6 +97,8 @@ function App() {
           isCheckMode={isCheckMode}
         />
       )}
+
+      <StartGameModal handlePlayAgain={handlePlayAgain} />
 
       {/* Submit button */}
       {isComplete && (
