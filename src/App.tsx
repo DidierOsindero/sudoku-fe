@@ -127,6 +127,7 @@ function App() {
         />
       )}
 
+      {/* Start Game Modal */}
       {isStartOfGame && <StartGameModal handleBeginGame={handleBeginGame} />}
 
       {/* Submit button */}
